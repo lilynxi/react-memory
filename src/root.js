@@ -13,10 +13,16 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
+const StyledInput = styled.input`
+  font-size: 2rem;
+  border: none;
+  padding: 1rem 2rem;
+`;
+
 const Root = ({ setPairs, pairs = null }) => (
   <Wrapper>
     {!pairs &&
-      <input type="number" placeholder="number of pairs" onKeyUp={setPairs} />}
+      <StyledInput type="number" placeholder="number of pairs" onKeyUp={setPairs} />}
     {pairs && <App pairs={pairs} />}
   </Wrapper>
 );

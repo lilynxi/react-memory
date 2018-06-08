@@ -7,15 +7,13 @@ import { getFactors } from '../shared/helpers';
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
-  ${props => props.isWon && `
-    background-color: green;
-    padding: 100px;
-  `}
 `;
 
 const CardWithSize = styled(Card)`
   width: ${props => props.cardWidth}vw;
   height: ${props => props.cardHeight}vh;
+  min-height: 6rem;
+  min-width: 6rem;
 `;
 
 const Deck = ({ state, dispatch, pairs }) => {
@@ -23,12 +21,8 @@ const Deck = ({ state, dispatch, pairs }) => {
   const cardWidth = 100 / getFactors(pairs * 2).secondFactor;
   const cardHeight = 100 / getFactors(pairs * 2).firstFactor;
 
-  const isWon = !cards.filter(
-    card => state.completed.indexOf(card.value) === -1,
-  ).length;
-
   return (
-    <Wrapper isWon={isWon}>
+    <Wrapper>
       {cards.map((card, index) => {
         const isTurned = state.turned.indexOf(index) !== -1;
         const isCompleted = state.completed.indexOf(card.value) !== -1;

@@ -5,11 +5,9 @@ const CARD_TURN = 'card/turn';
 
 const generateDeck = (pairsCount = 8) => {
   const randomSort = () => parseInt(Math.random() * 10 / 3.3, 10) - 1;
-  const randomNumber = Math.round(Math.random() * 20);
   const createCardValue = (value, index) => index % pairsCount;
   const createCardObject = value => ({
     value,
-    img: 1,
   });
 
   const cardsArray = Array.from(new Array(pairsCount * 2));
@@ -25,7 +23,7 @@ const initialState = ({ pairs }) => ({
   cards: generateDeck(pairs),
   turned: [],
   completed: [],
-  score: 50,
+  won: false,
 });
 
 const gameReducer = (state, action) => {
@@ -35,24 +33,25 @@ const gameReducer = (state, action) => {
       const needsReset = state.turned.length === 2;
       const turnedNew = needsReset ? [cardIndex] : [...state.turned, cardIndex];
       let completedNew = state.completed;
-      let scoreNew = state.score;
+      let wonNew = state.won;
 
       if (state.cards[turnedNew[0]] && state.cards[turnedNew[1]]) {
         if (
           state.cards[turnedNew[0]].value === state.cards[turnedNew[1]].value
         ) {
           completedNew = [...state.completed, state.cards[turnedNew[0]].value];
-          scoreNew += 50;
-        } else {
-          scoreNew -= 20;
         }
+      }
+
+      if (state.cards.length/2 === completedNew.length) {
+        wonNew = true;
       }
 
       return {
         ...state,
         turned: turnedNew,
         completed: completedNew,
-        score: scoreNew,
+        won: wonNew,
       };
     }
 

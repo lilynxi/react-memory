@@ -10,7 +10,7 @@ injectGlobal`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-size: 16px; /* set font size to enable proper rem usage */
+    font-size: 10px; /* set font size to enable proper rem usage */
     font-family: Lato, Verdana, sans-serif;
   }
 

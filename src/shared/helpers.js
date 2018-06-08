@@ -3,7 +3,7 @@ const calculateFactors = num => {
   const factors = [1]; // 1 will be a part of every solution.
   let i, j;
 
-  // Determine out increment value for the loop and starting point.
+  // Determine increment value for the loop and starting point.
   num % 2 === 0 ? ((i = 2), (j = 1)) : ((i = 3), (j = 2));
 
   for (i; i <= half; i += j) {
